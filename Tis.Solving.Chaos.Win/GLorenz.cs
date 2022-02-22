@@ -12,16 +12,16 @@ namespace Tis.Solving.Chaos
 {
     public partial class GLorenz : UserControl
     {
-        bool isResize = false;
+        readonly bool isResize = false;
 
-        object Lock = new();
+        readonly object Lock = new();
         double Time;
         CLorenz? A;
         CLorenz? B;
-        Pen penA = new(Color.FromArgb(200, Color.Red), 0.01f);
-        Pen penB = new(Color.FromArgb(200, Color.Green), 0.01f);
-        SolidBrush brushA = new(System.Drawing.Color.Red);
-        SolidBrush brushB = new(System.Drawing.Color.Green);
+        readonly Pen penA = new(Color.FromArgb(200, Color.Red), 0.01f);
+        readonly Pen penB = new(Color.FromArgb(200, Color.Green), 0.01f);
+        readonly SolidBrush brushA = new(System.Drawing.Color.Red);
+        readonly SolidBrush brushB = new(System.Drawing.Color.Green);
 
 
         bool IsTask;
@@ -108,8 +108,8 @@ namespace Tis.Solving.Chaos
 
             Graphics GL = e.Graphics;
 
-            Vector3 Max = Vector3.Max(A.Max, B.Max);
-            Vector3 Min = Vector3.Min(A.Min, B.Min);
+            CVector3D Max = CVector3D.Max(A.Max, B.Max);
+            CVector3D Min = CVector3D.Min(A.Min, B.Min);
 
             GL.DrawString($"Время: {Time};\r\n" +
                           $"dX={A.V.X - B.V.X};\r\n" +
@@ -160,7 +160,7 @@ namespace Tis.Solving.Chaos
             //B?.Draw(GL, radiusB);
         }
 
-        private double dT = 0.001;
+        readonly double dT = 0.001;
         private int TimeSleep = 0;
         private void RunLorens()
         {
@@ -208,15 +208,15 @@ namespace Tis.Solving.Chaos
                             double ax, double ay, double az,
                             double bx, double by, double bz)
         {
-            A = new CLorenz(new Vector3(ax, ay, az), σ, ρ, β);
-            B = new CLorenz(new Vector3(bx, by, bz), σ, ρ, β);
+            A = new CLorenz(new CVector3D(ax, ay, az), σ, ρ, β);
+            B = new CLorenz(new CVector3D(bx, by, bz), σ, ρ, β);
         }
 
         private void V_TextChanged(object sender, EventArgs e)
         {
             if (sender is TextBox tb)
             {
-                if (double.TryParse(tb.Text, out double d))
+                if (double.TryParse(tb.Text, out double _))
                 {
                     tb.BackColor = Color.Lime;
                 }

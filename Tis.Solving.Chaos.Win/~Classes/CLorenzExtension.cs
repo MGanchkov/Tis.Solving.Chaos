@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tis.Solving.Chaos
 {
-    public static class CLorenzException
+    public static class CLorenzExtension
     {
 
         public static void Draw(this CLorenz lorenz, Graphics GL, float radius, Pen Pen, SolidBrush SolidBrush)

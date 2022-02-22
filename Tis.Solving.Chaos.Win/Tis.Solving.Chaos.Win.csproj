@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Tis.Core\Tis.Core.Win\Tis.Core.Win.csproj" />
+    <ProjectReference Include="..\..\Tis.Core\Tis.Core\Tis.Core.csproj" />
     <ProjectReference Include="..\Tis.Solving.Chaos\Tis.Solving.Chaos.csproj" />
   </ItemGroup>
 

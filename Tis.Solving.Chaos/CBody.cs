@@ -62,8 +62,8 @@ namespace Tis.Solving.Chaos
             double d = r.Magnitude;
             double d3 = d * d * d;
 
-            a = Tools.Maths.G * b.m * r / d3;       //Гравитация.
-            a -= Tools.Maths.k * q * b.q * r / d3;  //Куллон, притягиваются, если заряды разные.
+            a = Tools.Maths.Const.G * b.m * r / d3;       //Гравитация.
+            a -= Tools.Maths.Const.k * q * b.q * r / d3;  //Куллон, притягиваются, если заряды разные.
 
             return a;
         }

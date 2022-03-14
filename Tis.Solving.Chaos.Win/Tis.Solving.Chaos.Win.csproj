@@ -14,4 +14,10 @@
     <ProjectReference Include="..\Tis.Solving.Chaos\Tis.Solving.Chaos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="GBigLorenz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,21 @@
-﻿namespace Tis.Solving.Chaos
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tis.Solving.Chaos
 {
-    public class CLorenz
+    public class CBigLorenz
     {
+        CDouble X;
+        CDouble Y;
+        CDouble Z;
+        CVector3D v;
+
         public List<CVector3D> Vs;
 
-        public CVector3D V { get; private set; }
+        public CVector3D V => v;
 
         /// <summary>
         /// σ > 1 — число Прандтля (критерий подобия тепловых процессов в жидкостях и газах);
@@ -32,27 +43,37 @@
         {
             lock (this)
             {
-                CVector3D v = new(V.X + dTime * (σ * (V.Y - V.X)),
-                                  V.Y + dTime * (V.X * (ρ - V.Z) - V.Y),
-                                  V.Z + dTime * (V.X * V.Y - β * V.Z));
-                //v.X = V.X + dTime * (σ * (V.Y - V.X));
-                //v.Y = V.Y + dTime * (V.X * (ρ - V.Z) - V.Y);
-                //v.Z = V.Z + dTime * (V.X * V.Y - β * V.Z);
+
+                CDouble x = X + dTime * (σ * (Y - X));
+                CDouble y = Y + dTime * (X * (ρ - Z) - Y);
+                CDouble z = Z + dTime * (X * Y - β * Z);
+
+                //x.Simplify();
+                //y.Simplify();
+                //z.Simplify();
+
+                X = x;
+                Y = y;
+                Z = z;
+                v = new CVector3D(X.ToDouble(), Y.ToDouble(), Z.ToDouble());
 
                 while (Vs.Count > 1000 / dTime)
                     Vs.RemoveAt(0);
                 Vs.Add(v);
-                V = v;
 
                 Max = CVector3D.Max(Max, v);
                 Min = CVector3D.Min(Min, v);
             }
         }
 
-        public CLorenz(CVector3D v, double σ, double ρ, double β)
+        public CBigLorenz(CVector3D v, double σ, double ρ, double β)
         {
             Vs = new List<CVector3D>();
-            V = v;
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
+            this.v = v;
+
             this.σ = σ;
             this.ρ = ρ;
             this.β = β;

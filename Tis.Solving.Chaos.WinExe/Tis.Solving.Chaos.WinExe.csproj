@@ -12,4 +12,10 @@
     <ProjectReference Include="..\Tis.Solving.Chaos.Win\Tis.Solving.Chaos.Win.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="FBigLorenz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

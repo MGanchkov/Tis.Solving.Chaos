@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Tis.Solving.Chaos
 {
-    public partial class GLorenz : UserControl
+    public partial class GBigLorenz : UserControl
     {
         readonly bool isResize = false;
 
         readonly object Lock = new();
         double Time;
-        CLorenz? A;
-        CLorenz? B;
+        CBigLorenz? A;
+        CBigLorenz? B;
         readonly Pen penA = new(Color.FromArgb(200, Color.Red), 0.01f);
         readonly Pen penB = new(Color.FromArgb(200, Color.Green), 0.01f);
         readonly SolidBrush brushA = new(System.Drawing.Color.Red);
@@ -28,7 +28,7 @@ namespace Tis.Solving.Chaos
         Task? Task;
 
 
-        public GLorenz()
+        public GBigLorenz()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -152,6 +152,7 @@ namespace Tis.Solving.Chaos
                 GL.DrawEllipse(new Pen(Color.Black, penA.Width), (float)A.V.X - radiusA, (float)A.V.Y - radiusA, 2.0f * radiusA, 2.0f * radiusA);
                 GL.FillEllipse(brushB, (float)B.V.X - radiusB, (float)B.V.Y - radiusB, 2.0f * radiusB, 2.0f * radiusB);
                 GL.DrawEllipse(new Pen(Color.Black, penB.Width), (float)B.V.X - radiusB, (float)B.V.Y - radiusB, 2.0f * radiusB, 2.0f * radiusB);
+
             }
 
             //A?.Draw(GL, radiusA);
@@ -173,9 +174,9 @@ namespace Tis.Solving.Chaos
                     A?.Step(dT);
                     B?.Step(dT);
 
-                    if (Math.Abs(A.V.X - B.V.X) > d && 
-                        Math.Abs(A.V.Y - B.V.Y) > d &&
-                        Math.Abs(A.V.Z - B.V.Z) > d && 
+                    if (A.V.X - B.V.X > d && 
+                        A.V.Y - B.V.Y > d && 
+                        A.V.Z - B.V.Z > d && 
                         TimeSleep == 0) TimeSleep = 1;
                 }
                 Time += dT;
@@ -215,8 +216,8 @@ namespace Tis.Solving.Chaos
                             double ax, double ay, double az,
                             double bx, double by, double bz)
         {
-            A = new CLorenz(new CVector3D(ax, ay, az), σ, ρ, β);
-            B = new CLorenz(new CVector3D(bx, by, bz), σ, ρ, β);
+            A = new CBigLorenz(new CVector3D(ax, ay, az), σ, ρ, β);
+            B = new CBigLorenz(new CVector3D(bx, by, bz), σ, ρ, β);
         }
 
         private void V_TextChanged(object sender, EventArgs e)

@@ -9,9 +9,10 @@ namespace Tis.Solving.Chaos.WinExe
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new FLorenz());
+            //Application.Run(new FLorenz());
             //Application.Run(new FBigLorenz());
-            Application.Run(new FWorld());
+            //Application.Run(new FWorld());
+            Application.Run(new FFeigenbaum());
         }
     }
 }

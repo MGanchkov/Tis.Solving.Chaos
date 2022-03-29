@@ -10,7 +10,7 @@ namespace Tis.Solving.Chaos
     {
 
         public CBody(CVector3D location, CVector3D speed, double radius, double m, double q)
-            : this(CSID.New, true, location, speed, CVector3D.Zero, radius, m, q) { }
+            : this(new CSID(), true, location, speed, CVector3D.Zero, radius, m, q) { }
 
         [System.Text.Json.Serialization.JsonConstructor]
         public CBody(CSID id, bool isEnable, CVector3D location, CVector3D speed, CVector3D acceleration, double radius, double m, double q)

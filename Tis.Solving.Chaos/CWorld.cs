@@ -35,7 +35,7 @@ namespace Tis.Solving.Chaos
                 Bodies.Add(body);
             }            
         }
-        public void Add(CVector3D location, CVector3D speed, double radius, double m, double q) => Add(new CBody(CSID.New, true, location, speed, CVector3D.Zero, radius, m, q));
+        public void Add(CVector3D location, CVector3D speed, double radius, double m, double q) => Add(new CBody(new CSID(), true, location, speed, CVector3D.Zero, radius, m, q));
 
         public void Solving()
         {
